@@ -1,12 +1,14 @@
-name: MoonTVPlus Cron
+name: MoonTVPlus Trigger on Push
 on:
-  schedule:
-    - cron: '0 0 * * *' # 每天执行一次
+  push:
+    branches:
+      - main  # 当 main 分支有更新时触发
+  workflow_dispatch: # 允许手动点击按钮触发
 jobs:
-  cron:
+  trigger:
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger Cron
+      - name: Trigger Cron API
         run: |
           curl -X GET "https://tv.0121314.xyz/api/cron/mtvpls" \
           -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}"
