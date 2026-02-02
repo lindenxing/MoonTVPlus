@@ -1,0 +1,12 @@
+name: MoonTVPlus Cron
+on:
+  schedule:
+    - cron: '0 0 * * *' # 每天执行一次
+jobs:
+  cron:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Cron
+        run: |
+          curl -X GET "https://tv.0121314.xyz/api/cron/mtvpls" \
+          -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}"
